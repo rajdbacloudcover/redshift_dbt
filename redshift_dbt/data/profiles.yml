@@ -1,0 +1,14 @@
+cloudcover_redshift:
+  target: dev
+  outputs:
+    dev:
+      type: redshift
+      host: raj-mumbai-redshift.ckhp3juaqdde.ap-south-1.redshift.amazonaws.com
+      user: awsuser
+      password: "{{ env_var('PASSWORD') }}"
+      port: 5439
+      dbname: tickit
+      schema: public_reports
+      threads: 4
+      keepalives_idle: 0
+
