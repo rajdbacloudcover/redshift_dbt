@@ -22,12 +22,11 @@ RUN pip install dbt-redshift
 
 # create .dbt folder with profiles.yml file
 RUN mkdir ~/.dbt
-RUN cp /coinswitch-datalake-dbt/.dbt/profiles.yml ~/.dbt/
-RUN cp /profiles.yml ~/.dbt/
+RUN cp /redshift_dbt/data/profiles.yml ~/.dbt/
 
 #Setup the Environment for dbt password retrieval from AWS Secrets Manager
 RUN apt-get update -y && apt-get install jq -y && apt-get install awscli -y
-RUN secret=$(aws secretsmanager get-secret-value --secret-id prod/dbt/Redshift --output json  | jq '.SecretString' -r)
+RUN secret=$(aws secretsmanager get-secret-value --secret-id dev//dbt/Redshift --output json  | jq '.SecretString' -r)
 RUN password=$(echo $secret | jq '.password' -r)
 RUN export PASSWORD=$password
 
